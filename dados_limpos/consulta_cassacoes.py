@@ -9,7 +9,7 @@ arquivos = [
 ]
 
 # 1. Carregar e concatenar todos os CSVs em um único DataFrame
-dfs = [pd.read_csv(arquivo, encoding='utf-8') for arquivo in arquivos]
+dfs = [pd.read_csv(arquivo, encoding='latin-1') for arquivo in arquivos]
 dados_completos = pd.concat(dfs, ignore_index=True)
 
 # 2. Conectar ao SQLite em memória
@@ -32,9 +32,6 @@ query1 = """
         COUNT(*) AS total_cassados
     FROM 
         candidatos
-    WHERE 
-        DS_MOTIVO LIKE '%abuso de poder%' 
-        OR DS_MOTIVO LIKE '%ficha limpa%'
     GROUP BY 
         SG_UF
     ORDER BY 
@@ -50,9 +47,6 @@ query2 = """
         COUNT(*) AS total_cassados
     FROM 
         candidatos
-    WHERE 
-        DS_MOTIVO LIKE '%abuso de poder%' 
-        OR DS_MOTIVO LIKE '%ficha limpa%'
     GROUP BY 
         SG_PARTIDO
     ORDER BY 
@@ -70,9 +64,6 @@ query3 = """
         COUNT(*) AS total_cassados
     FROM 
         candidatos
-    WHERE 
-        DS_MOTIVO LIKE '%abuso de poder%' 
-        OR DS_MOTIVO LIKE '%ficha limpa%'
     GROUP BY 
         DS_GENERO, DS_GRAU_INSTRUCAO, DS_CARGO
     ORDER BY 
@@ -88,9 +79,6 @@ query4 = """
         COUNT(*) AS total_ocorrencias
     FROM 
         candidatos
-    WHERE 
-        DS_MOTIVO LIKE '%abuso de poder%' 
-        OR DS_MOTIVO LIKE '%ficha limpa%'
     GROUP BY 
         DS_MOTIVO
     ORDER BY 
@@ -106,9 +94,6 @@ query5 = """
         COUNT(*) AS total_cassados
     FROM 
         candidatos
-    WHERE 
-        DS_MOTIVO LIKE '%abuso de poder%' 
-        OR DS_MOTIVO LIKE '%ficha limpa%'
     GROUP BY 
         DS_SIT_TOT_TURNO
     ORDER BY 
@@ -123,9 +108,6 @@ query6 = """
         COUNT(*) AS total_cassados
     FROM 
         candidatos
-    WHERE 
-        DS_MOTIVO LIKE '%abuso de poder%' 
-        OR DS_MOTIVO LIKE '%ficha limpa%'
     GROUP BY 
         DS_OCUPACAO
     ORDER BY 
