@@ -5,13 +5,13 @@ import os
 # Função para carregar um CSV e garantir leitura correta de acentos
 def carregar_csv_com_erro(path):
     try:
-        # Ler o CSV com codificação UTF-8 e delimitador correto
-        df = pd.read_csv(path, encoding="utf-8", sep=";", engine="python")
+        # Ler o CSV com codificação iso-8859-1 e delimitador correto
+        df = pd.read_csv(path, encoding="iso-8859-1", sep=";", engine="python")
         print(f"Colunas carregadas de {path}: {df.columns.tolist()}")
         return df
     except UnicodeDecodeError:
         print(f"Erro de codificação ao ler {path}. Tentando com 'latin1'.")
-        df = pd.read_csv(path, encoding="latin1", sep=";", engine="python")
+        df = pd.read_csv(path, encoding="iso-8859-1", sep=";", engine="python")
         return df
     except Exception as e:
         print(f"Erro ao ler o arquivo {path}: {e}")
@@ -95,6 +95,6 @@ for perfil_file, motivo_file in zip(arquivos_perfil, arquivos_motivo):
 
     # Salvar o CSV limpo e integrado na pasta 'dados_limpos' com UTF-8
     output_path = f"dados_limpos/cassacao_cand_{estado}.csv"
-    df_limpo.to_csv(output_path, index=False, encoding="utf-8")
+    df_limpo.to_csv(output_path, index=False, encoding="iso-8859-1")
 
 print("Processo de limpeza concluído")
